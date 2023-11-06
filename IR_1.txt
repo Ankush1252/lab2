@@ -1,0 +1,49 @@
+##################################### IR 1 stopword 
+
+import nltk
+from nltk.stem import PorterStemmer
+
+nltk.download('stopwords')
+
+stopwords = nltk.corpus.stopwords.words('english')
+print(stopwords)
+
+def removestopwords(text):
+    tokens = nltk.word_tokenize(text)
+    filtered_tokens = [token for token in tokens if token not in stopwords]
+    return ' '.join(filtered_tokens)
+
+text = '''India were once again the top team on Day
+          1 of the 2nd Test against West Indies in Trinidad,
+          reaching 288/4 at stumps. Half-centuries from Rohit 
+          Sharma, Yashasvi Jaiswal and Virat Kohli kept India 
+          ticking even as they lost four of the top order wickets to
+          a much-improved and disciplined West Indian bowling line-up.
+          However, as good as they were, the newly-formed Indian 
+          opening pair of Rohit and Jaiswal continued their brilliant  
+          run, putting up a second century partnership in two innings..'''
+processed_text = removestopwords(text)
+print(processed_text)
+
+def stemming(text):
+    tokens = nltk.word_tokenize(text)
+    filtered_tokens = [token for token in tokens if token not in stopwords]
+    stemmer = PorterStemmer()
+    stemmed_tokens = [stemmer.stem(token) for token in filtered_tokens]
+    return ' '.join(stemmed_tokens)
+    
+text = '''India were once again the top team on Day
+          1 of the 2nd Test against West Indies in Trinidad,
+          reaching 288/4 at stumps. Half-centuries from Rohit 
+          Sharma, Yashasvi Jaiswal and Virat Kohli kept India 
+          ticking even as they lost four of the top order wickets to
+          a much-improved and disciplined West Indian bowling line-up.
+          However, as good as they were, the newly-formed Indian 
+          opening pair of Rohit and Jaiswal continued their brilliant 
+          run, putting up a second century partnership in two innings..'''
+processed_text = removestopwords(text)
+processed_text =stemming(text)
+print(processed_text)
+
+
+
